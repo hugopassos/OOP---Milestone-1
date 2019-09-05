@@ -22,36 +22,27 @@ def draw_board(square_values)
   puts "         |       |       "
 end
 
-
-#Creating the players and choosing weapon
-puts "Player one name:"
-name = gets.chomp
-
-puts "Player one weapon:"
-weapon = gets.chomp
-weapon.upcase!
-while weapon != "X" && weapon != "O"
-  puts "Invalid entry. Choose 'X' or 'O': "
-  weapon = gets.chomp
-  weapon.upcase!
-end
-
-player_one = Player.new(name, weapon)
-if weapon == "X"
-  weapon = "O"
-elsif weapon == "O"
+def get_names
+  puts "Player one name:"
+  name = gets.chomp
   weapon = "X"
+  $player_one = Player.new(name, weapon)
+
+  puts "Player two name:"
+  name = gets.chomp
+  weapon = "O"
+  $player_two = Player.new(name, weapon)
 end
 
-puts "Player two name:"
-name = gets.chomp
-player_two = Player.new(name, weapon)
+get_names
 
 square_values = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
-active_player = player_one.name
-active_weapon = player_one.weapon
+active_player = $player_one.name
+active_weapon = $player_one.weapon
 
+puts active_player
+puts active_weapon
 
 draw_board(square_values)
 puts "#{active_player}, choose a square: "
