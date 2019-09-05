@@ -22,40 +22,35 @@ def draw_board(square_values)
   puts "         |       |       "
 end
 
-def get_names
-  puts "Player one name:"
+def get_name(num, weapon)
+  puts "Player #{num} name:"
   name = gets.chomp
-  weapon = "X"
-  $player_one = Player.new(name, weapon)
-
-  puts "Player two name:"
-  name = gets.chomp
-  weapon = "O"
-  $player_two = Player.new(name, weapon)
+  player_one = Player.new(name, weapon)
 end
 
-def switch_player
-  if $active_player == $player_one.name
-    $active_player = $player_two.name
-    $active_weapon = $player_two.weapon
-  elsif active_player == $player_two.name
-    $active_player = $player_one.name
-    $active_weapon = $player_one.weapon
+def switch_player(active_player, player_one, player_two)
+  if active_player == player_one.name
+    active_player = player_two.name
+    active_weapon = player_two.weapon
+  elsif active_player == player_two.name
+    active_player = player_one.name
+    active_weapon = player_one.weapon
   end
 end
 
-get_names
+player_one = get_name("one", "X")
+player_two = get_name("two", "O")
 
 square_values = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
-$active_player = $player_one.name
-$active_weapon = $player_one.weapon
+active_player = player_one.name
+active_weapon = player_one.weapon
 
-puts $active_player
-puts $active_weapon
+puts active_player
+puts active_weapon
 
 draw_board(square_values)
-puts "#{$active_player}, choose a square: "
+puts "#{active_player}, choose a square: "
 choice = gets.chomp.to_i
 choice -= 1
 
@@ -64,12 +59,12 @@ while square_values[choice.to_i] != " "
   choice = gets.chomp
 end
 
-square_values[choice.to_i] = $active_weapon
+square_values[choice.to_i] = active_weapon
 
-switch_player
+switch_player(active_player, player_one, player_two)
 
 draw_board(square_values)
-puts "#{$active_player}, choose a square: "
+puts "#{active_player}, choose a square: "
 choice = gets.chomp
 
 while square_values[choice.to_i] != " "
