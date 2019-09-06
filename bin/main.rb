@@ -28,6 +28,7 @@ def get_name(num, weapon)
   player_one = Player.new(name, weapon)
 end
 
+# switching players each turn
 def switch_player(active_player, player_one, player_two)
   if active_player == player_one.name
     active_player = player_two.name
@@ -36,21 +37,20 @@ def switch_player(active_player, player_one, player_two)
     active_player = player_one.name
     active_weapon = player_one.weapon
   end
-  puts "Im inside the method #{active_player}"
   return active_player, active_weapon
 end
 
 def determine_winner(weapon, square_values, game_over)
-  game_over = true if square_values[0] == square_values[1] && square_values[0] == square_values[2]
-  game_over = true if square_values[3] == square_values[4] && square_values[3] == square_values[5]
-  game_over = true if square_values[6] == square_values[7] && square_values[6] == square_values[8]
+  game_over = true if square_values[0] == square_values[1] && square_values[0] == square_values[2] && square_values[0] != " "
+  game_over = true if square_values[3] == square_values[4] && square_values[3] == square_values[5] && square_values[3] != " "
+  game_over = true if square_values[6] == square_values[7] && square_values[6] == square_values[8] && square_values[6] != " "
 
-  game_over = true if square_values[0] == square_values[3] && square_values[0] == square_values[6]
-  game_over = true if square_values[1] == square_values[4] && square_values[1] == square_values[7]
-  game_over = true if square_values[2] == square_values[5] && square_values[2] == square_values[8]
+  game_over = true if square_values[0] == square_values[3] && square_values[0] == square_values[6] && square_values[0] != " "
+  game_over = true if square_values[1] == square_values[4] && square_values[1] == square_values[7] && square_values[1] != " "
+  game_over = true if square_values[2] == square_values[5] && square_values[2] == square_values[8] && square_values[2] != " "
 
-  game_over = true if square_values[0] == square_values[4] && square_values[0] == square_values[8]
-  game_over = true if square_values[2] == square_values[4] && square_values[2] == square_values[6]
+  game_over = true if square_values[0] == square_values[4] && square_values[0] == square_values[8] && square_values[0] != " "
+  game_over = true if square_values[2] == square_values[4] && square_values[2] == square_values[6] && square_values[2] != " "
 
   game_over
 end
@@ -64,9 +64,6 @@ square_values = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 active_player = player_one.name
 active_weapon = player_one.weapon
 
-puts active_player
-puts active_weapon
-
 count = 0
 game_over = false
 
@@ -79,12 +76,21 @@ while game_over == false
 
   while square_values[choice.to_i] != " "
     puts "Invalid square. Choose an empty square."
-    choice = gets.chomp
+    choice = gets.chomp.to_i
+    choice -= 1
   end
 
   square_values[choice.to_i] = active_weapon
 
   game_over = determine_winner(active_weapon, square_values, game_over)
+
+  # display message for the winner
+  if game_over == true
+    draw_board(square_values)
+    puts "Congratulations #{active_player}, you won!"
+  end
+
+  count += 1
 
   # logic for draw
   if count == 9
@@ -93,13 +99,5 @@ while game_over == false
     puts "Game draw."
   end
 
-  if game_over == false
-    puts "Im outside the method #{active_player}"
-
-    active_player, active_weapon = switch_player(active_player, player_one, player_two)
-
-    puts "Im back outside the method #{active_player}"
-  end
-
-  count += 1
+  active_player, active_weapon = switch_player(active_player, player_one, player_two)
 end
