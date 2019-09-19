@@ -24,8 +24,7 @@ class Game
     @board.square_values.each_with_index do |value, index|
       next if index % 3 != 0
       if @board.square_values[index] != ' '
-        game_over = true if @board.square_values[index] == @board.square_values[index + 1] &&
-        @board.square_values[index] == @board.square_values[index + 2]
+        game_over = true if @board.square_values[index] == @board.square_values[index + 1] && @board.square_values[index] == @board.square_values[index + 2]
       end
     end
 
@@ -33,20 +32,17 @@ class Game
     @board.square_values.each_with_index do |value, index|
       next if index > 2
       if @board.square_values[index] != ' '
-        game_over = true if @board.square_values[index] == @board.square_values[index + 3] &&
-        @board.square_values[index] == @board.square_values[index + 6]
+        game_over = true if @board.square_values[index] == @board.square_values[index + 3] && @board.square_values[index] == @board.square_values[index + 6]
       end
     end
 
     # check diagonals
     @board.square_values.each_with_index do |value, index|
       if @board.square_values[0] != ' '
-        game_over = true if @board.square_values[0] == @board.square_values[4] &&
-        @board.square_values[0] == @board.square_values[8]
+        game_over = true if @board.square_values[0] == @board.square_values[4] && @board.square_values[0] == @board.square_values[8]
       end
       if @board.square_values[2] != ' '
-        game_over = true if @board.square_values[2] == @board.square_values[4] &&
-        @board.square_values[2] == @board.square_values[6]
+        game_over = true if @board.square_values[2] == @board.square_values[4] && @board.square_values[2] == @board.square_values[6]
       end
     end
     game_over
