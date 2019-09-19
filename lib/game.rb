@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'board.rb'
 require_relative 'player.rb'
 
@@ -19,14 +20,14 @@ class Game
   end
 
   def determine_winner(board, game_over)
-    game_over = true if @board.square_values[0] == @board.square_values[1] && @board.square_values[0] == @board.square_values[2] && @board.square_values[0] != " "
-    game_over = true if @board.square_values[3] == @board.square_values[4] && @board.square_values[3] == @board.square_values[5] && @board.square_values[3] != " "
-    game_over = true if @board.square_values[6] == @board.square_values[7] && @board.square_values[6] == @board.square_values[8] && @board.square_values[6] != " "
-    game_over = true if @board.square_values[0] == @board.square_values[3] && @board.square_values[0] == @board.square_values[6] && @board.square_values[0] != " "
-    game_over = true if @board.square_values[1] == @board.square_values[4] && @board.square_values[1] == @board.square_values[7] && @board.square_values[1] != " "
-    game_over = true if @board.square_values[2] == @board.square_values[5] && @board.square_values[2] == @board.square_values[8] && @board.square_values[2] != " "
-    game_over = true if @board.square_values[0] == @board.square_values[4] && @board.square_values[0] == @board.square_values[8] && @board.square_values[0] != " "
-    game_over = true if @board.square_values[2] == @board.square_values[4] && @board.square_values[2] == @board.square_values[6] && @board.square_values[2] != " "
+    game_over = true if @board.square_values[0] == @board.square_values[1] && @board.square_values[0] == @board.square_values[2] && @board.square_values[0] != ' '
+    game_over = true if @board.square_values[3] == @board.square_values[4] && @board.square_values[3] == @board.square_values[5] && @board.square_values[3] != ' '
+    game_over = true if @board.square_values[6] == @board.square_values[7] && @board.square_values[6] == @board.square_values[8] && @board.square_values[6] != ' '
+    game_over = true if @board.square_values[0] == @board.square_values[3] && @board.square_values[0] == @board.square_values[6] && @board.square_values[0] != ' '
+    game_over = true if @board.square_values[1] == @board.square_values[4] && @board.square_values[1] == @board.square_values[7] && @board.square_values[1] != ' '
+    game_over = true if @board.square_values[2] == @board.square_values[5] && @board.square_values[2] == @board.square_values[8] && @board.square_values[2] != ' '
+    game_over = true if @board.square_values[0] == @board.square_values[4] && @board.square_values[0] == @board.square_values[8] && @board.square_values[0] != ' '
+    game_over = true if @board.square_values[2] == @board.square_values[4] && @board.square_values[2] == @board.square_values[6] && @board.square_values[2] != ' '
     game_over
   end
 end
