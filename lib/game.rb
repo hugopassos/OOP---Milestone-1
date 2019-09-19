@@ -19,25 +19,24 @@ class Game
     active_player
   end
 
-  def determine_winner(board, game_over)
-    # check rows
-    @board.sq_val.each_with_index do |value, i|
+  def determine_winner(game_over)
+    @board.sq_val.each_with_index do |_value, i|
       next if i % 3 != 0
+
       if @board.sq_val[i] != ' '
         game_over = true if @board.sq_val[i] == @board.sq_val[i + 1] && @board.sq_val[i] == @board.sq_val[i + 2]
       end
     end
 
-    # check columns
-    @board.sq_val.each_with_index do |value, i|
+    @board.sq_val.each_with_index do |_value, i|
       next if i > 2
+
       if @board.sq_val[i] != ' '
         game_over = true if @board.sq_val[i] == @board.sq_val[i + 3] && @board.sq_val[i] == @board.sq_val[i + 6]
       end
     end
 
-    # check diagonals
-    @board.sq_val.each_with_index do |value, i|
+    @board.sq_val.each_with_index do |_value, i|
       if @board.sq_val[0] != ' '
         game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
       end
