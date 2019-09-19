@@ -19,7 +19,7 @@ class Game
     active_player
   end
 
-  def checkRows(game_over)
+  def check_rows(game_over)
     @board.sq_val.each_with_index do |_value, i|
       next if i % 3 != 0
 
@@ -30,9 +30,7 @@ class Game
     game_over
   end
 
-  def determine_winner(game_over)
-    return true if checkRows(game_over) == true
-
+  def check_columns(game_over)
     @board.sq_val.each_with_index do |_value, i|
       next if i > 2
 
@@ -40,13 +38,23 @@ class Game
         game_over = true if @board.sq_val[i] == @board.sq_val[i + 3] && @board.sq_val[i] == @board.sq_val[i + 6]
       end
     end
+    game_over
+  end
 
+  def check_diagonals(game_over)
     if @board.sq_val[0] != ' '
       game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
     end
     if @board.sq_val[2] != ' '
       game_over = true if @board.sq_val[2] == @board.sq_val[4] && @board.sq_val[2] == @board.sq_val[6]
     end
+    game_over
+  end
+
+  def determine_winner(game_over)
+    return true if check_rows(game_over) == true
+    return true if check_columns(game_over) == true
+    return true if check_diagonals(game_over) == true
     game_over
   end
 end
