@@ -29,12 +29,13 @@ class Board
 
   def square_play(choice, active_weapon)
     if choice.negative? || choice > 8
-      return false, 'Invalid square. Values must be between 1 and 9.'
+      validation = [false, 'Invalid square. Values must be between 1 and 9.']
     elsif @square_values[choice] == ' '
       @square_values[choice] = active_weapon
-      return true, ''
+      validation = [true, '']
     else
-      return false, 'Invalid square. Choose an empty square.'
+      validation = [false, 'Invalid square. Choose an empty square.']
     end
+    validation
   end
 end
