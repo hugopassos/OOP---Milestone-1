@@ -24,18 +24,27 @@ class Game
     @board.square_values.each_with_index do |value, index|
       next if index % 3 != 0
       if @board.square_values[index] != ' '
-        game_over = true if @board.square_values[index] == @board.square_values[index + 1] && @board.square_values[index] == @board.square_values[index + 2]
+        game_over = true if @board.square_values[index] == @board.square_values[index + 1]
+        && @board.square_values[index] == @board.square_values[index + 2]
       end
     end
 
     # check columns
-    game_over = true if @board.square_values[0] == @board.square_values[3] && @board.square_values[0] == @board.square_values[6] && @board.square_values[0] != ' '
-    game_over = true if @board.square_values[1] == @board.square_values[4] && @board.square_values[1] == @board.square_values[7] && @board.square_values[1] != ' '
-    game_over = true if @board.square_values[2] == @board.square_values[5] && @board.square_values[2] == @board.square_values[8] && @board.square_values[2] != ' '
+    @board.square_values.each_with_index do |value, index|
+      next if index > 2
+      if @board.square_values[index] != ' '
+        game_over = true if @board.square_values[index] == @board.square_values[index + 3]
+        && @board.square_values[index] == @board.square_values[index + 6]
+      end
+    end
 
     # check diagonals
-    game_over = true if @board.square_values[0] == @board.square_values[4] && @board.square_values[0] == @board.square_values[8] && @board.square_values[0] != ' '
-    game_over = true if @board.square_values[2] == @board.square_values[4] && @board.square_values[2] == @board.square_values[6] && @board.square_values[2] != ' '
+    if @board.square_values[index] != ' '
+      game_over = true if @board.square_values[0] == @board.square_values[4]
+      && @board.square_values[0] == @board.square_values[8]
+      game_over = true if @board.square_values[2] == @board.square_values[4]
+      && @board.square_values[2] == @board.square_values[6]
+    end
     game_over
   end
 end
