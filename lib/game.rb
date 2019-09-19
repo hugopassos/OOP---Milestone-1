@@ -39,11 +39,15 @@ class Game
     end
 
     # check diagonals
-    if @board.square_values[index] != ' '
-      game_over = true if @board.square_values[0] == @board.square_values[4] &&
-      @board.square_values[0] == @board.square_values[8]
-      game_over = true if @board.square_values[2] == @board.square_values[4] &&
-      @board.square_values[2] == @board.square_values[6]
+    @board.square_values.each_with_index do |value, index|
+      if @board.square_values[0] != ' '
+        game_over = true if @board.square_values[0] == @board.square_values[4] &&
+        @board.square_values[0] == @board.square_values[8]
+      end
+      if @board.square_values[2] != ' '
+        game_over = true if @board.square_values[2] == @board.square_values[4] &&
+        @board.square_values[2] == @board.square_values[6]
+      end
     end
     game_over
   end
