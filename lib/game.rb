@@ -41,10 +41,14 @@ class Game
     game_over
   end
 
-  def check_diagonals(game_over)
+  def check_diagonal_one(game_over)
     if @board.sq_val[0] != ' '
       game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
     end
+    game_over
+  end
+
+  def check_diagonal_two(game_over)
     if @board.sq_val[2] != ' '
       game_over = true if @board.sq_val[2] == @board.sq_val[4] && @board.sq_val[2] == @board.sq_val[6]
     end
@@ -54,7 +58,9 @@ class Game
   def determine_winner(game_over)
     return true if check_rows(game_over) == true
     return true if check_columns(game_over) == true
-    return true if check_diagonals(game_over) == true
+    return true if check_diagonal_one(game_over) == true
+    return true if check_diagonal_two(game_over) == true
+
     game_over
   end
 end
