@@ -19,7 +19,7 @@ class Game
     active_player
   end
 
-  def determine_winner(game_over)
+  def checkRows(game_over)
     @board.sq_val.each_with_index do |_value, i|
       next if i % 3 != 0
 
@@ -27,6 +27,11 @@ class Game
         game_over = true if @board.sq_val[i] == @board.sq_val[i + 1] && @board.sq_val[i] == @board.sq_val[i + 2]
       end
     end
+    game_over
+  end
+
+  def determine_winner(game_over)
+    return true if checkRows(game_over) == true
 
     @board.sq_val.each_with_index do |_value, i|
       next if i > 2
