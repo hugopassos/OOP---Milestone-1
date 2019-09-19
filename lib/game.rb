@@ -36,13 +36,11 @@ class Game
       end
     end
 
-    @board.sq_val.each_with_index do |_value, i|
-      if @board.sq_val[0] != ' '
-        game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
-      end
-      if @board.sq_val[2] != ' '
-        game_over = true if @board.sq_val[2] == @board.sq_val[4] && @board.sq_val[2] == @board.sq_val[6]
-      end
+    if @board.sq_val[0] != ' '
+      game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
+    end
+    if @board.sq_val[2] != ' '
+      game_over = true if @board.sq_val[2] == @board.sq_val[4] && @board.sq_val[2] == @board.sq_val[6]
     end
     game_over
   end
