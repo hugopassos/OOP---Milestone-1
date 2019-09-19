@@ -21,23 +21,23 @@ class Game
 
   def determine_winner(board, game_over)
     # check rows
-    @board.sq_val.each_with_index do |value, index|
-      next if index % 3 != 0
-      if @board.sq_val[index] != ' '
-        game_over = true if @board.sq_val[index] == @board.sq_val[index + 1] && @board.sq_val[index] == @board.sq_val[index + 2]
+    @board.sq_val.each_with_index do |value, i|
+      next if i % 3 != 0
+      if @board.sq_val[i] != ' '
+        game_over = true if @board.sq_val[i] == @board.sq_val[i + 1] && @board.sq_val[i] == @board.sq_val[i + 2]
       end
     end
 
     # check columns
-    @board.sq_val.each_with_index do |value, index|
-      next if index > 2
-      if @board.sq_val[index] != ' '
-        game_over = true if @board.sq_val[index] == @board.sq_val[index + 3] && @board.sq_val[index] == @board.sq_val[index + 6]
+    @board.sq_val.each_with_index do |value, i|
+      next if i > 2
+      if @board.sq_val[i] != ' '
+        game_over = true if @board.sq_val[i] == @board.sq_val[i + 3] && @board.sq_val[i] == @board.sq_val[i + 6]
       end
     end
 
     # check diagonals
-    @board.sq_val.each_with_index do |value, index|
+    @board.sq_val.each_with_index do |value, i|
       if @board.sq_val[0] != ' '
         game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
       end
