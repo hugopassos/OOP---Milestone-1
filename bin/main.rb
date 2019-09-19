@@ -1,14 +1,14 @@
-require "../lib/player.rb"
-require "../lib/board.rb"
-require "../lib/game.rb"
+require '../lib/player.rb'
+require '../lib/board.rb'
+require '../lib/game.rb'
 
-print "Player one name: "
+print 'Player one name: '
 name = gets.chomp
-player_one = Player.new(name, "X")
+player_one = Player.new(name, 'X')
 
-print "Player two name: "
+print 'Player two name: '
 name = gets.chomp
-player_two = Player.new(name, "O")
+player_two = Player.new(name, 'O')
 
 board = Board.new
 
@@ -43,7 +43,7 @@ while game_over == false
   if count == 9
     game_over = true
     board.draw_board
-    puts "Game draw."
+    puts 'Game draw.'
   end
 
   active_player = game.switch_player(active_player)

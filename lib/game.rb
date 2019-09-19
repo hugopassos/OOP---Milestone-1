@@ -1,5 +1,6 @@
-require_relative "board.rb"
-require_relative "player.rb"
+# frozen_string_literal: true
+require_relative 'board.rb'
+require_relative 'player.rb'
 
 class Game
   def initialize(player_one, player_two, board)
@@ -14,7 +15,7 @@ class Game
     elsif active_player == @player_two
       active_player = @player_one
     end
-    return active_player
+    active_player
   end
 
   def determine_winner(board, game_over)
