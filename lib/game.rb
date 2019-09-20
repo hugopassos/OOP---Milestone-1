@@ -11,7 +11,7 @@ class Game
   end
 
   def switch_player(active_player)
-    return active_player = active_player == @player_one ? @player_two : @player_one
+    return active_player == @player_one ? @player_two : @player_one
   end
 
   def check_rows(game_over)
