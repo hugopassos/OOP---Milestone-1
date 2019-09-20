@@ -1,6 +1,6 @@
-require_relative 'player.rb'
-require_relative 'board.rb'
-require_relative 'game.rb'
+require '../lib/player.rb'
+require '../lib/board.rb'
+require '../lib/game.rb'
 
 def draw_board(board)
   puts '  ¹     | ²     | ³     '
