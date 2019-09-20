@@ -7,26 +7,6 @@ class Board
     @sq_val = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
 
-  def draw_board
-    puts '  ¹     | ²     | ³     '
-    puts '        |       |       '
-    puts "    #{@sq_val[0]}   |   #{@sq_val[1]}   |   #{@sq_val[2]}   "
-    puts '        |       |       '
-    puts '        |       |       '
-    puts ' -----------------------'
-    puts '  ⁴     | ⁵     | ⁶     '
-    puts '        |       |       '
-    puts "    #{@sq_val[3]}   |   #{@sq_val[4]}   |   #{@sq_val[5]}   "
-    puts '        |       |       '
-    puts '        |       |       '
-    puts ' -----------------------'
-    puts '  ⁷     | ⁸     | ⁹     '
-    puts '        |       |       '
-    puts "    #{@sq_val[6]}   |   #{@sq_val[7]}   |   #{@sq_val[8]}   "
-    puts '        |       |       '
-    puts '        |       |       '
-  end
-
   def square_play(choice, active_weapon)
     if choice.negative? || choice > 8
       validation = [false, 'Invalid square. Values must be between 1 and 9.']
