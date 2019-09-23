@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Player
-  attr_accessor :name, :weapon
+  attr_reader :name, :weapon
 
   def initialize(name, weapon)
     @name = name

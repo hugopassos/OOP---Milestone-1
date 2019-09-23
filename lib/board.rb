@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Board
-  attr_accessor :sq_val
+  attr_reader :sq_val
 
   def initialize
     @sq_val = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
