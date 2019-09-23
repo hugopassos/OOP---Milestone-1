@@ -51,7 +51,7 @@ while game_over == false
     validation = board.square_play(gets.chomp.to_i - 1, active_player.weapon)
   end
 
-  game_over = game.determine_winner
+  game_over = board.determine_winner
 
   # display message for the winner
   if game_over == true
