@@ -14,48 +14,48 @@ class Game
     active_player == @player_one ? @player_two : @player_one
   end
 
-  def check_rows(game_over)
+  def check_rows
     @board.sq_val.each_with_index do |_value, i|
       next if i % 3 != 0
 
       if @board.sq_val[i] != ' '
-        game_over = true if @board.sq_val[i] == @board.sq_val[i + 1] && @board.sq_val[i] == @board.sq_val[i + 2]
+        return true if @board.sq_val[i] == @board.sq_val[i + 1] && @board.sq_val[i] == @board.sq_val[i + 2]
       end
     end
-    game_over
+    false
   end
 
-  def check_columns(game_over)
+  def check_columns
     @board.sq_val.each_with_index do |_value, i|
       next if i > 2
 
       if @board.sq_val[i] != ' '
-        game_over = true if @board.sq_val[i] == @board.sq_val[i + 3] && @board.sq_val[i] == @board.sq_val[i + 6]
+        return true if @board.sq_val[i] == @board.sq_val[i + 3] && @board.sq_val[i] == @board.sq_val[i + 6]
       end
     end
-    game_over
+    false
   end
 
-  def check_diagonal_one(game_over)
+  def check_diagonal_one
     if @board.sq_val[0] != ' '
-      game_over = true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
+      return true if @board.sq_val[0] == @board.sq_val[4] && @board.sq_val[0] == @board.sq_val[8]
     end
-    game_over
+    false
   end
 
-  def check_diagonal_two(game_over)
+  def check_diagonal_two
     if @board.sq_val[2] != ' '
-      game_over = true if @board.sq_val[2] == @board.sq_val[4] && @board.sq_val[2] == @board.sq_val[6]
+      return true if @board.sq_val[2] == @board.sq_val[4] && @board.sq_val[2] == @board.sq_val[6]
     end
-    game_over
+    false
   end
 
-  def determine_winner(game_over)
-    return true if check_rows(game_over) == true
-    return true if check_columns(game_over) == true
-    return true if check_diagonal_one(game_over) == true
-    return true if check_diagonal_two(game_over) == true
+  def determine_winner
+    return true if check_rows == true
+    return true if check_columns == true
+    return true if check_diagonal_one == true
+    return true if check_diagonal_two == true
 
-    game_over
+    false
   end
 end
