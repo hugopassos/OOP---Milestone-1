@@ -9,12 +9,12 @@ class Board
 
   def square_play(choice, active_weapon)
     if choice.negative? || choice > 8
-      return [false, 'Invalid entry, values must be between 1 and 9.']
+      [false, 'Invalid entry, values must be between 1 and 9.']
     elsif @sq_val[choice] == ' '
       @sq_val[choice] = active_weapon
-      return [true, '']
+      [true, '']
     else
-      return [false, 'Invalid entry, you should choose an empty square.']
+      [false, 'Invalid entry, you should choose an empty square.']
     end
   end
 
