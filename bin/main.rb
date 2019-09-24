@@ -22,11 +22,11 @@ def draw_board(board)
   puts '        |       |       '
 end
 
-print 'Player one name: '
+print 'Player one name:'
 name = gets.chomp
 player_one = Player.new(name, 'X')
 
-print 'Player two name: '
+print 'Player two name:'
 name = gets.chomp
 player_two = Player.new(name, 'O')
 
@@ -41,9 +41,13 @@ while game_over == false
 
   puts "#{game.active_player.name}, choose a square value: "
 
-  while game.valid?(gets.chomp.to_i - 1) == false
+  validation = game.valid?(gets.chomp.to_i - 1)
+
+  while validation[0] == false
     draw_board(game.board)
+    puts validation[1]
     puts "#{game.active_player.name}, choose a square value: "
+    validation = game.valid?(gets.chomp.to_i - 1)
   end
 
   game_over = game.determine_winner

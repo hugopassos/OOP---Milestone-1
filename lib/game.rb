@@ -22,6 +22,6 @@ class Game
   end
 
   def valid?(choice)
-    @board.square_play(choice, @active_player.weapon)
+    validation = @board.square_play(choice, @active_player.weapon)
   end
 end
