@@ -30,33 +30,28 @@ print 'Player two name: '
 name = gets.chomp
 player_two = Player.new(name, 'O')
 
-board = Board.new
+game = Game.new(player_one, player_two)
+puts game.board.sq_val[0]
 
-puts board.sq_val[0]
-
-game = Game.new(player_one, player_two, board)
-
-active_player = player_one
 count = 0
 game_over = false
 
 while game_over == false
-  draw_board(board)
+  draw_board(game.board)
 
-  puts "#{active_player.name}, choose a square value: "
-  validation = board.square_play(gets.chomp.to_i - 1, active_player.weapon)
+  puts "#{game.active_player.name}, choose a square value: "
 
-  while validation[0] == false
-    puts validation[1]
-    validation = board.square_play(gets.chomp.to_i - 1, active_player.weapon)
+  while game.valid?(gets.chomp.to_i - 1) == false
+    draw_board(game.board)
+    puts "#{game.active_player.name}, choose a square value: "
   end
 
-  game_over = board.determine_winner
+  game_over = game.determine_winner
 
   # display message for the winner
   if game_over == true
-    draw_board(board)
-    puts "Congratulations #{active_player.name}, you won!"
+    draw_board(game.board)
+    puts "Congratulations #{game.active_player.name}, you won!"
     break
   end
 
@@ -65,9 +60,9 @@ while game_over == false
   # logic for draw
   if count == 9
     game_over = true
-    draw_board(board)
+    draw_board(game.board)
     puts 'Game draw.'
   end
 
-  active_player = game.switch_player(active_player)
+  game.switch_player
 end

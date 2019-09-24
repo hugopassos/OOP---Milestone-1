@@ -9,14 +9,13 @@ class Board
 
   def square_play(choice, active_weapon)
     if choice.negative? || choice > 8
-      validation = [false, 'Invalid square. Values must be between 1 and 9.']
+      false
     elsif @sq_val[choice] == ' '
       @sq_val[choice] = active_weapon
-      validation = [true, '']
+      true
     else
-      validation = [false, 'Invalid square. Choose an empty square.']
+      false
     end
-    validation
   end
 
   def check_rows
@@ -52,15 +51,6 @@ class Board
     if @sq_val[2] != ' '
       return true if @sq_val[2] == @sq_val[4] && @sq_val[2] == @sq_val[6]
     end
-    false
-  end
-
-  def determine_winner
-    return true if check_rows == true
-    return true if check_columns == true
-    return true if check_diagonal_one == true
-    return true if check_diagonal_two == true
-
     false
   end
 end
