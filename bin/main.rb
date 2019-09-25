@@ -1,73 +1,72 @@
-class Player
-  attr_accessor :name, :weapon
+require '../lib/player.rb'
+require '../lib/board.rb'
+require '../lib/game.rb'
 
-  def initialize(name, weapon)
-    @name = name
-    @weapon = weapon
+def draw_board(board)
+  puts '  ¹     | ²     | ³     '
+  puts '        |       |       '
+  puts "    #{board.sq_val[0]}   |   #{board.sq_val[1]}   |   #{board.sq_val[2]}   "
+  puts '        |       |       '
+  puts '        |       |       '
+  puts ' -----------------------'
+  puts '  ⁴     | ⁵     | ⁶     '
+  puts '        |       |       '
+  puts "    #{board.sq_val[3]}   |   #{board.sq_val[4]}   |   #{board.sq_val[5]}   "
+  puts '        |       |       '
+  puts '        |       |       '
+  puts ' -----------------------'
+  puts '  ⁷     | ⁸     | ⁹     '
+  puts '        |       |       '
+  puts "    #{board.sq_val[6]}   |   #{board.sq_val[7]}   |   #{board.sq_val[8]}   "
+  puts '        |       |       '
+  puts '        |       |       '
+end
+
+print 'Player one name:'
+name = gets.chomp
+player_one = Player.new(name, 'X')
+
+print 'Player two name:'
+name = gets.chomp
+player_two = Player.new(name, 'O')
+
+game = Game.new(player_one, player_two)
+puts game.board.sq_val[0]
+
+count = 0
+game_over = false
+
+while game_over == false
+  draw_board(game.board)
+
+  puts "#{game.active_player.name}, choose a square value: "
+
+  validation = game.valid?(gets.chomp.to_i - 1)
+
+  while validation[0] == false
+    draw_board(game.board)
+    puts validation[1]
+    puts "#{game.active_player.name}, choose a square value: "
+    validation = game.valid?(gets.chomp.to_i - 1)
   end
-end
 
-def draw_board(square_values)
-  puts "     0       1       2   "
-  puts "         |       |       "
-  puts "0    #{square_values[0]}   |   #{square_values[1]}   |   #{square_values[2]}   "
-  puts "         |       |       "
-  puts "  -----------------------"
-  puts "         |       |       "
-  puts "1    #{square_values[3]}   |   #{square_values[4]}   |   #{square_values[5]}   "
-  puts "         |       |       "
-  puts "  -----------------------"
-  puts "         |       |       "
-  puts "2    #{square_values[6]}   |   #{square_values[7]}   |   #{square_values[8]}   "
-  puts "         |       |       "
-end
+  game_over = game.determine_winner
 
-def get_name(num, weapon)
-  puts "Player #{num} name:"
-  name = gets.chomp
-  player_one = Player.new(name, weapon)
-end
-
-def switch_player(active_player, player_one, player_two)
-  if active_player == player_one.name
-    active_player = player_two.name
-    active_weapon = player_two.weapon
-  elsif active_player == player_two.name
-    active_player = player_one.name
-    active_weapon = player_one.weapon
+  # display message for the winner
+  if game_over == true
+    draw_board(game.board)
+    puts "Congratulations #{game.active_player.name}, you won!"
+    break
   end
-end
 
-player_one = get_name("one", "X")
-player_two = get_name("two", "O")
+  count += 1
 
-square_values = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  # logic for draw
+  if count == 9
+    game_over = true
+    draw_board(game.board)
+    puts 'Game draw.'
+  end
 
-active_player = player_one.name
-active_weapon = player_one.weapon
-
-puts active_player
-puts active_weapon
-
-draw_board(square_values)
-puts "#{active_player}, choose a square: "
-choice = gets.chomp.to_i
-choice -= 1
-
-while square_values[choice.to_i] != " "
-  puts "Invalid square. Choose an empty square."
-  choice = gets.chomp
-end
-
-square_values[choice.to_i] = active_weapon
-
-switch_player(active_player, player_one, player_two)
-
-draw_board(square_values)
-puts "#{active_player}, choose a square: "
-choice = gets.chomp
-
-while square_values[choice.to_i] != " "
-  puts "Invalid square. Choose an empty square."
-  choice = gets.chomp
+  game.switch_player
 end
